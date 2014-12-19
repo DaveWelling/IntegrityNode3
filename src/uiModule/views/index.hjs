@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/test.js"></script>
+    <script src="/javascripts/uniqueIam.js"> </script>
+  </head>
+  <body>
+    <h1>{{ title }}</h1>
+    <p>Welcome to {{ title }}</p>
+    <button onclick="doSomething()"/>
+    <button onclick="doSomeLoggin()"/>
+  </body>
+</html>
