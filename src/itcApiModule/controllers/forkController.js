@@ -1,6 +1,6 @@
 (function(forkController){
     forkController.init  = function (app) {
-        var node = require("../model/node");
+        var node = require("../node");
         app.post("/api/fork", function (request, response){
             var requestNode =  node.deserialize(request.body);
             var stamps = requestNode.stamp.fork();

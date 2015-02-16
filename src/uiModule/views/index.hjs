@@ -1,15 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
   <head>
     <title>{{ title }}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="/javascripts/test.js"></script>
-    <script src="/javascripts/uniqueIam.js"> </script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-route/angular-route.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/socket.io-client/socket.io.js"></script>
+    <script src="/bower_components/angular-socket-io/socket.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/bower_components/cuid/dist/browser-cuid.js"></script>
+    <script src="/src/workplaceModule/workspaceController.js"></script>
+    <script src="/src/workplaceModule/workspaceService.js"></script>
+    <script src="/src/app.js"></script>
   </head>
-  <body>
+  <body class="container">
     <h1>{{ title }}</h1>
     <p>Welcome to {{ title }}</p>
-    <button onclick="doSomething()"/>
-    <button onclick="doSomeLoggin()"/>
+    <div>
+      <input type='textbox' id='node0' />
+      <div class="view-container">
+        <div ng-view class="view-frame"></div>
+      </div>
+    </div>
   </body>
 </html>

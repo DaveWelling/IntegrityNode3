@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./uiModule/routes/index');
 var users = require('./uiModule/routes/users');
-var controllers = require('./uiModule/controllers/index');
+var controllers = require('./itcApiModule/controllers/index');
 
 var app = express();
 
@@ -43,7 +43,7 @@ app.use(express.static(__dirname + '/../public'));
 controllers.init(app);
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'uiModule/views'));
 app.set('view engine', 'hjs');
 
 
