@@ -7,9 +7,22 @@ var bodyParser = require('body-parser');
 
 var routes = require('./uiModule/routes/index');
 var users = require('./uiModule/routes/users');
-var controllers = require('./itcApiModule/controllers/index');
 
 var app = express();
+
+// REST CONTROLLERS
+var controllers = require('./itcApiModule/controllers/index');
+
+// SOCKET CONTROLLERS
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+http.listen(3001, function(){
+    console.log('socket.io listening on *:3001');
+});
+var workspace = require('./businessLogicModule/workspace');
+workspace.init(io);
+
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));

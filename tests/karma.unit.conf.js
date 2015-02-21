@@ -17,7 +17,7 @@
             { pattern: 'vendor/sinon-1.12.2.js', watched: false, included: true, served: true },
 			'src/app.js',
 			'src/**/*.js',
-			'client/clientBusinessLogicModule/**/*.js'
+			'../tests/client/**/*.js'
 		],
 
 		// Preprocessors to convert e.g. html to angular template cache items

@@ -19,6 +19,9 @@ angular.module("workspaceModule").service('workspaceService', ["socketApi",  fun
     this.delete = function(id){
         socketApi.emit("workspace.delete", id);
     };
+    this.getRootWorkspace = function(){
+        socketApi.emit("workspace.getRootWorkspace");
+    };
 
     return this;
 }]);

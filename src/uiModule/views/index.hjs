@@ -7,12 +7,13 @@
     <script src="/bower_components/angular-route/angular-route.js"></script>
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/socket.io-client/socket.io.js"></script>
-    <script src="/bower_components/angular-socket-io/socket.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/bower_components/cuid/dist/browser-cuid.js"></script>
     <script src="/src/workplaceModule/workspaceController.js"></script>
     <script src="/src/workplaceModule/workspaceService.js"></script>
     <script src="/src/app.js"></script>
+    <script src="/src/appConfig.js"></script>
+    <script src="/src/appRouter.js"></script>
   </head>
   <body class="container">
     <h1>{{ title }}</h1>
