@@ -3,11 +3,11 @@ angular.module("app").constant('appConfig', {
     })
     .config(["$routeProvider","appConfig", function(routes,appConfig){
     routes.when("/workspace", {
-        templateUrl: "/partials/workspace.html",
+        templateUrl: "src/workspaceModule/workspace.html",
         controller: "workspaceController"
     })
         .when("/workspace/:workspaceId", {
-            templateUrl: "/partials/workspace.html",
+            templateUrl: "src/workspaceModule/workspace.html",
             controller: "workspaceController"
         })
         .otherwise({

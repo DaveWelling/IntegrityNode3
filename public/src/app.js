@@ -1,1 +1,1 @@
-angular.module("app", ['ngRoute', 'workspaceModule']);
+angular.module("app", ['ngRoute', 'workspaceModule', 'workitemModule', 'workitemTreeModule']);

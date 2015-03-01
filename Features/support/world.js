@@ -33,7 +33,6 @@ module.exports = function() {
         this.World = function World(callback){
             this.expect = chai.expect;
             this.driver = driver; // Set "World" driver instance
-            console.log("config driver set to this");
             callback();
         };
 
@@ -41,7 +40,6 @@ module.exports = function() {
             // clean up!
             // Be careful, there is no World instance available on `this` here
             // because all scenarios are done and World instances are long gone.
-            console.log("after features");
             driver.quit();
             callback();
         });

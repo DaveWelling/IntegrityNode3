@@ -52,6 +52,28 @@
         return deferred.promise;
     };
 
+
+    documents.getByTitle = function(title){
+        var deferred = q.defer();
+        database.getDb(function(err, db){
+            if (err){
+                deferred.reject("Database initialization failed with error: " + err);
+                return;
+            }
+            if (!title){
+                deferred.reject("A title must be passed into the getByTitle method");
+            }
+            db.documents.findOne({ title: title }, function(err, documentFound){
+                if (err) {
+                    deferred.reject("Find of document with title " + title + " failed with error: " + err);
+                    return;
+                }
+                deferred.resolve(documentFound);
+            })
+        });
+        return deferred.promise;
+    };
+
     documents.insert = function (document){
         var deferred = q.defer();
         database.getDb(function(err, db){

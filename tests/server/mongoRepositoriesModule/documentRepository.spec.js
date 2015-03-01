@@ -14,9 +14,38 @@ describe("documentRepository Integration", function(){
         cleanUpQueue.push(testDoc);
         return testDoc;
     }
+    function getTestDocumentWithTitle(title){
+        var testDoc = {
+            id: cuid(),
+            title: title
+        };
+        cleanUpQueue.push(testDoc);
+        return testDoc;
+    }
     afterEach(function(){
         cleanUpQueue.forEach(function(testDoc){
             repository.delete(testDoc.id);
+        });
+    });
+
+    describe("getByTitle", function(){
+        it("should get a document with the given title if one exists", function(done){
+            var title = cuid();
+            try {
+                repository.insert(getTestDocumentWithTitle(title)).then(function (document) {
+                    var holdDocument = document;
+                    try {
+                        repository.getByTitle(title).then(function (foundDocument) {
+                            foundDocument.id.should.equal(holdDocument.id);
+                            done();
+                        });
+                    } catch(ex){
+                        done(ex);
+                    }
+                }, done);
+            } catch(ex){
+                done(ex);
+            }
         });
     });
     describe("get", function(){

@@ -1,4 +1,4 @@
-angular.module("workspaceModule", ['ngRoute'])
+angular.module("workspaceModule")
     .controller("workspaceController", ["$routeParams", "$scope", "workspaceService", function (routeParams, $scope, service) {
         var holdWorkspace;
         if (routeParams && routeParams.workspaceId) {

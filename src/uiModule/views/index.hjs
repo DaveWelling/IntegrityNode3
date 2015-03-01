@@ -2,27 +2,45 @@
 <html ng-app="app">
   <head>
     <title>{{ title }}</title>
+
+    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css' />
+    <link rel='stylesheet' href='/bower_components/angular-ui-tree/dist/angular-ui-tree.min.css' />
+    <!--<link rel='stylesheet' href='/vendor/angular-ui-tree.min.css' />-->
     <link rel='stylesheet' href='/stylesheets/style.css' />
+
+  </head>
+  <body>
+    <div class="view-container">
+        <div ng-view class="view-frame"></div>
+    </div>
+
+    <!-- Vendor stuff -->
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-route/angular-route.js"></script>
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/socket.io-client/socket.io.js"></script>
-    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!--<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>-->
     <script src="/bower_components/cuid/dist/browser-cuid.js"></script>
-    <script src="/src/workplaceModule/workspaceController.js"></script>
-    <script src="/src/workplaceModule/workspaceService.js"></script>
+    <script src="/bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
+    <!--<script src="/vendor/angular-ui-tree.js"></script>-->
+
+
+
+    <!-- app code -->
+    <script src="/src/workitemTreeModule/workitemTreeModule.js"></script>
+    <script src="/src/workitemTreeModule/workItemTreeDirective.js"></script>
+
+    <script src="/src/workitemModule/workitemModule.js"></script>
+    <script src="/src/workitemModule/workitemController.js"></script>
+    <script src="/src/workitemModule/workitemDirective.js"></script>
+
+    <script src="/src/workspaceModule/workspaceModule.js"></script>
+    <!--<script src="/src/workspaceModule/workspaceDirective.js"></script>-->
+    <script src="/src/workspaceModule/workspaceController.js"></script>
+    <script src="/src/workspaceModule/workspaceService.js"></script>
+
     <script src="/src/app.js"></script>
     <script src="/src/appConfig.js"></script>
     <script src="/src/appRouter.js"></script>
-  </head>
-  <body class="container">
-    <h1>{{ title }}</h1>
-    <p>Welcome to {{ title }}</p>
-    <div>
-      <input type='textbox' id='node0' />
-      <div class="view-container">
-        <div ng-view class="view-frame"></div>
-      </div>
-    </div>
   </body>
 </html>

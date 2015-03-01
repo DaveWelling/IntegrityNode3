@@ -16,8 +16,8 @@ var controllers = require('./itcApiModule/controllers/index');
 // SOCKET CONTROLLERS
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-http.listen(3001, function(){
-    console.log('socket.io listening on *:3001');
+http.listen(59682, function(){
+    console.log('socket.io listening on *:59682');
 });
 var workspace = require('./businessLogicModule/workspace');
 workspace.init(io);

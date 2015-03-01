@@ -1,0 +1,7 @@
+<!--<span ng-hide="editMode">{{node.title}}</span>-->
+<span   name="workitem"
+       autofocus
+       ng-model="node.title"
+       ng-keypress="titleKeyPress($event)"
+       contenteditable
+        class="workitem"></span>

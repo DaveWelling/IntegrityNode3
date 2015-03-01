@@ -1,3 +1,9 @@
+@import "../bower_components/bootstrap/less/variables.less";
+@import "../bower_components/bootstrap/less/mixins.less";
+@import "../bower_components/bootstrap/less/list-group.less";
+@import "../bower_components/bootstrap/less/buttons.less";
+
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -5,4 +11,57 @@ body {
 
 a {
   color: #00B7FF;
+}
+
+.workitem {
+  cursor: text;
+  display: block;
+  min-height: 22px;
+  //white-space: nowrap;
+  //float: left;
+}
+.btn {
+  margin-right: 8px;
+  float:left;
+}
+
+.glyphForExpander{
+  margin-top: 3px;
+  margin-left: 2px;
+}
+
+.angular-ui-tree-handle {
+  background: #f8faff;
+  border: 0px solid #dae2ea;
+  color: #7c9eb2;
+  //padding: 10px 10px;
+  padding: 5px 10px 5px 10px;
+  display:block;
+  float: none;
+}
+
+.angular-ui-tree-handle:hover {
+  color: #438eb9;
+  background: #f4f6f7;
+  border-color: #dce2e8;
+}
+
+.angular-ui-tree-placeholder {
+  background: #f0f9ff;
+  border: 2px dashed #bed2db;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+.nextActionableList {
+  .list-group;
+}
+
+.nextActionableItem {
+  .list-group-item;
+}
+.nextActionableItem:hover {
+  .list-group-item.active;
 }

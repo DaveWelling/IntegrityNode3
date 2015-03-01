@@ -3,13 +3,7 @@ var openApplicationStepDefinitionsWrapper = function () {
     var By = require('selenium-webdriver').By,
         until = require('selenium-webdriver').until;
     var cuid = require('cuid');
-    this.Before(function(callback){
-        console.log("before hook");
-        callback();
-    });
-    this.After(function(callback){
-        callback();
-    });
+    var q = require('q');
 
     this.Given(/^the application has not been used before$/, function (callback) {
         // probably need to remove a flag or some data here to make it look like the first time.
@@ -17,14 +11,7 @@ var openApplicationStepDefinitionsWrapper = function () {
     });
 
     this.When(/^I open the application$/, function (callback) {
-        this.driver.get('http://localhost:3000/').then(
-                function(){
-                    callback();
-                },
-                function(ex){
-                    callback.fail(ex);
-                }
-            );
+        this.driver.get('http://localhost:3000/').then(callback,callback.fail);
     });
 
     this.Then(/^the default workspace should be shown$/, function (callback) {
@@ -39,16 +26,20 @@ var openApplicationStepDefinitionsWrapper = function () {
     });
 
     this.Then(/^the workplace should have an new workitem focused$/, function (callback) {
-        this.driver.switchTo().activeElement().then(
-            function(element){
-                expect(element.value).to.equal("");
-                expect(element.name).to.equal("workItem");
-                callback();
-            },
-            function(error){
-                callback.fail(error);
-            }
-        );
+        var expect = this.expect;
+        var driver = this.driver;
+        var input = driver.findElement({tagName: "input", name: "workitem"});
+        until.elementIsSelected(input);
+        q.all([
+            input.getAttribute("value"),
+            input.getTagName(),
+            input.getAttribute("name")
+        ]).then(function(results){
+            expect(results[0]).to.equal("");
+            expect(results[1]).to.equal("input");
+            expect(results[2]).to.equal("workitem");
+            callback();
+        }, callback.fail);
     });
 };
 module.exports = openApplicationStepDefinitionsWrapper;
