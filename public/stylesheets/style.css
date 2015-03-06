@@ -554,20 +554,36 @@ input[type="reset"].btn-block,
 input[type="button"].btn-block {
   width: 100%;
 }
+html,
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100%;
 }
 a {
   color: #00B7FF;
+}
+#bottomHorizontalRule {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#wrap {
+  min-height: 100%;
+  /* the bottom margin is the negative value of the footer's height */
+  margin: 0 auto -50px;
+}
+#push,
+#stickyFooter {
+  /* .push must be the same height as .footer */
+  height: 40px;
 }
 .workitem {
   cursor: text;
   display: block;
   min-height: 22px;
+  line-height: 22px;
 }
 .btn {
-  margin-right: 8px;
+  margin-right: 5px;
   float: left;
 }
 .glyphForExpander {
@@ -578,7 +594,7 @@ a {
   background: #f8faff;
   border: 0px solid #dae2ea;
   color: #7c9eb2;
-  padding: 5px 10px 5px 10px;
+  padding: 5px 5px 5px 5px;
   display: block;
   float: none;
 }
@@ -586,6 +602,10 @@ a {
   color: #438eb9;
   background: #f4f6f7;
   border-color: #dce2e8;
+  padding-right: 30px;
+  background-image: url('/images/moveHandle.png');
+  background-position: right;
+  background-repeat: no-repeat;
 }
 .angular-ui-tree-placeholder {
   background: #f0f9ff;

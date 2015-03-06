@@ -10,8 +10,17 @@
 
   </head>
   <body>
-    <div class="view-container">
-        <div ng-view class="view-frame"></div>
+    <div id="wrap">
+        <div class="view-container workspace">
+            <div ng-view class="view-frame"></div>
+        </div>
+        <div id="push"></div>
+    </div>
+    <div id="stickyFooter">
+        <hr id="bottomHorizontalRule"/>
+        <footer class="container">
+            <small><a href="http://theredcircuit.com">The Red Circuit</a></small>
+        </footer>
     </div>
 
     <!-- Vendor stuff -->
