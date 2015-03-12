@@ -568,7 +568,7 @@ a {
 }
 #wrap {
   min-height: 100%;
-  /* the bottom margin is the negative value of the footer's height */
+  /* the bottom margin is the negative value of the footer's height plus horizontal rule bottom margin*/
   margin: 0 auto -50px;
 }
 #push,
@@ -576,11 +576,12 @@ a {
   /* .push must be the same height as .footer */
   height: 40px;
 }
-.workitem {
+.workitemContent {
   cursor: text;
   display: block;
-  min-height: 22px;
-  line-height: 22px;
+  min-height: 23px;
+  line-height: 23px;
+  padding-left: 5px;
 }
 .btn {
   margin-right: 5px;
@@ -613,6 +614,12 @@ a {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+.nextActionableArea {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #c9f0d2;
+  border-radius: 15px;
 }
 .nextActionableList {
   margin-bottom: 20px;

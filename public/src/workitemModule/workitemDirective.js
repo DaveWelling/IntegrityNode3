@@ -5,7 +5,23 @@ angular.module("workitemModule").directive("workitem",function(){
         scope: {
             node: "=ngModel"
         },
-        controller: 'workitemController'
+        controller: function($scope, $element, $attrs){
+            var treeNodeHandle = $scope.$parent;
+            var treeNode = treeNodeHandle.$parent;
+            function saveWorkitemTitle(){
+                console.log($scope.item.title);
+            }
+            $scope.titleKeyPress = function(keyEvent){
+                if (keyEvent.which === 13){
+                    saveWorkitemTitle()
+                }
+
+            };
+            if (treeNode.depth() === 1){
+                $element.children(".workitemContent")[0].focus();
+            }
+        }
+        //controller: 'workitemController'
     }
 });
 

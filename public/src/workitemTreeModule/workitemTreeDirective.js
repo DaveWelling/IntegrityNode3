@@ -1,9 +1,10 @@
+
 angular.module('workitemTreeModule').directive('workitemTree', function(){
     return {
         templateUrl: 'src/workitemTreeModule/templateTree.html',
         restrict: 'E',
         scope:{},
-        controller: function($scope, $element){
+        link: function($scope, $element){
             //$scope.data = [{title:"", nodes:{}}];
             $scope.data = [
                 {title: "hello", nodes:

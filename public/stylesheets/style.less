@@ -6,24 +6,23 @@
 html,
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  height: 100%;
+  height: 100%; // Required for sticky footer
 }
 
 a {
   color: #00B7FF;
 }
 
-.workspace{
-  //margin-bottom: 40px;
-  //margin-top:60px;
-}
+
+//** Foot stuff **
 #bottomHorizontalRule {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
 #wrap{
   min-height: 100%;
-  /* the bottom margin is the negative value of the footer's height */
+  /* the bottom margin is the negative value of the footer's height plus horizontal rule bottom margin*/
   margin: 0 auto -50px;
 }
 
@@ -32,13 +31,17 @@ a {
   /* .push must be the same height as .footer */
   height: 40px;
 }
+//** End footer stuff**
 
-.workitem {
+.workitemContent {
   cursor: text;
   display: block;
-  min-height: 22px;
-  line-height: 22px;
+  min-height: 23px;
+  line-height: 23px;
+  padding-left: 5px;
 }
+
+//** Workitem tree stuff **
 .btn {
   margin-right: 5px;
   float:left;
@@ -58,8 +61,6 @@ a {
   float: none;
 }
 
-
-
 .angular-ui-tree-handle:hover {
   color: #438eb9;
   background: #f4f6f7;
@@ -77,7 +78,17 @@ a {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+//** End Workitem tree stuff **
 
+
+
+//** Next Actionable list stuff **
+.nextActionableArea {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #c9f0d2;
+  border-radius: 15px;
+}
 
 .nextActionableList {
   .list-group;
@@ -89,3 +100,4 @@ a {
 .nextActionableItem:hover {
   .list-group-item.active;
 }
+//** End Next Actionable list stuff **

@@ -36,19 +36,17 @@
 
 
     <!-- app code -->
-    <script src="/src/workitemTreeModule/workitemTreeModule.js"></script>
+    <script src="/src/app.js"></script>
+    <script src="/src/commonModule/socketFactory.js"></script>
     <script src="/src/workitemTreeModule/workItemTreeDirective.js"></script>
 
-    <script src="/src/workitemModule/workitemModule.js"></script>
-    <script src="/src/workitemModule/workitemController.js"></script>
     <script src="/src/workitemModule/workitemDirective.js"></script>
+    <script src="/src/workitemModule/workitemService.js"></script>
 
-    <script src="/src/workspaceModule/workspaceModule.js"></script>
     <!--<script src="/src/workspaceModule/workspaceDirective.js"></script>-->
     <script src="/src/workspaceModule/workspaceController.js"></script>
     <script src="/src/workspaceModule/workspaceService.js"></script>
 
-    <script src="/src/app.js"></script>
     <script src="/src/appConfig.js"></script>
     <script src="/src/appRouter.js"></script>
   </body>

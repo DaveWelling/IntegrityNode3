@@ -2,7 +2,7 @@
 (function(data){
 
     data.workspaces = require("./workspaces");
-    data.documents = require("./documents");
+    data.workitems = require("./workitems");
 
 
 })(module.exports);

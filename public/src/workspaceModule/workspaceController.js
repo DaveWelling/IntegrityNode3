@@ -1,17 +1,28 @@
 angular.module("workspaceModule")
-    .controller("workspaceController", ["$routeParams", "$scope", "workspaceService", function (routeParams, $scope, service) {
+    .controller("workspaceController", ["$routeParams", "$scope", "workspaceService", "workitemService"
+        , function (routeParams, $scope, workspaceService, workitemService) {
         var holdWorkspace;
+        var holdRootWorkitem;
         if (routeParams && routeParams.workspaceId) {
-            holdWorkspace = service.get(routeParams.workspaceId)
+            holdWorkspace = workspaceService.get(routeParams.workspaceId)
+        }
+        if (holdWorkspace) {
+            holdRootWorkitem = workitemService.get(holdWorkspace.rootWorkitemId);
         } else {
             holdWorkspace = {
                 "id": cuid(),
-                "name": "New Workplace"
+                "name": "New Workplace",
+                "rootWorkitemId": cuid()
             };
-            service.create(holdWorkspace);
+            holdRootWorkitem = {
+                "id": cuid(),
+                "title": ""
+            };
+            workspaceService.create(holdWorkspace);
+            workitemService.create(holdRootWorkitem);
         }
-        $scope.focusDocument = {};
         $scope.workplace = holdWorkspace;
+        $scope.rootWorkitem = holdRootWorkitem;
     }]);
 
 

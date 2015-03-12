@@ -13,7 +13,7 @@
                 } else {
                     db = {
                         db:returnedDb,
-                        documents:returnedDb.collection("documents"),
+                        workitems:returnedDb.collection("workitems"),
                         workspaces:returnedDb.collection("workspaces")
                     };
                     next(null , db);
