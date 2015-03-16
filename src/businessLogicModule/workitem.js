@@ -1,27 +1,23 @@
 (function(workitem){
     var repository = require("../mongoRepositoriesModule");
 
-    workitem.init = function(io){
-        io.on("workitem.get", workitem.get);
-        io.on("workitem.create", workitem.create);
-        io.on("workitem.update", workitem.update);
-        io.on("workitem.delete", workitem.delete);
-        io.on("workitem.getRootworkitem", workitem.getRootworkitem);
+    workitem.init = function(socketTraffic){
+        socketTraffic.respond("workitem.get", workitem.get);
+        socketTraffic.respond("workitem.create", workitem.create);
+        socketTraffic.respond("workitem.update", workitem.update);
+        socketTraffic.respond("workitem.remove", workitem.remove);
     };
-    workitem.get = function(id, callback){
-        var workitem = repository.workitems.get(id);
-        callback(workitem);
+    workitem.get = function(id){
+        return repository.workitems.get(id);
     };
     workitem.update = function(update){
         return repository.workitems.update(update);
     };
-    workitem.delete = function(id){
-        return repository.workitems.delete(id)
+    workitem.remove = function(id){
+        return repository.workitems.remove(id)
     };
     workitem.create = function(workitem){
+        console.log("Workitem create: " + workitem.title);
         return repository.workitems.insert(workitem);
     };
-    workitem.getRootworkitem = function(noData, callback){
-        workitem.get(repository.workitems.getRootworkitemCuid(), callback);
-    }
 })(module.exports);

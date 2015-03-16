@@ -1,27 +1,25 @@
 (function(workspace){
     var repository = require("../mongoRepositoriesModule");
-
-    workspace.init = function(io){
-        io.on("workspace.get", workspace.get);
-        io.on("workspace.create", workspace.create);
-        io.on("workspace.update", workspace.update);
-        io.on("workspace.delete", workspace.delete);
-        io.on("workspace.getRootWorkspace", workspace.getRootWorkspace);
+    workspace.init = function(socketTraffic){
+        socketTraffic.respond("workspace.get", workspace.get);
+        socketTraffic.respond("workspace.create", workspace.create);
+        socketTraffic.respond("workspace.update", workspace.update);
+        socketTraffic.respond("workspace.delete", workspace.remove);
+        socketTraffic.respond("workspace.getRootWorkspace", workspace.getRootWorkspace);
     };
-    workspace.get = function(id, callback){
-        var workspace = repository.workspaces.get(id);
-        callback(workspace);
+    workspace.get = function(id){
+        return repository.workspaces.get(id);
     };
     workspace.update = function(update){
         return repository.workspaces.update(update);
     };
-    workspace.delete = function(id){
-        return repository.workspaces.delete(id)
+    workspace.remove = function(id){
+        return repository.workspaces.remove(id)
     };
     workspace.create = function(workspace){
         return repository.workspaces.insert(workspace);
     };
-    workspace.getRootWorkspace = function(noData, callback){
-        workspace.get(repository.workspaces.getRootWorkspaceCuid(), callback);
+    workspace.getRootWorkspace = function(){
+        workspace.get(repository.workspaces.getRootWorkspaceCuid());
     }
 })(module.exports);

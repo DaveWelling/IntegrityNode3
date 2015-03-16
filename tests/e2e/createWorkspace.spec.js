@@ -1,8 +1,9 @@
 describe("Workspace", function(){
     var context = require('../helpers/seleniumContext');
     var _ = require('underscore');
-    ////var mongoDocuments = require('../../src/mongoRepositoriesModule/documents');
-    //var cuid = require('cuid');
+    var cuid = require('cuid');
+    var mongoWorkitems = require('../../src/mongoRepositoriesModule/workitems');
+
 
 
     beforeEach(function(){
@@ -31,16 +32,17 @@ describe("Workspace", function(){
     //
     //});
 
-    //describe("Enter a unique name for a new workitem node", function(){
-    //    beforeEach(function(){
-    //        element({tagName: "input", name: "workitem"}).sendKeys(uniqueValue, webdriver.Key.ENTER);
-    //    });
-    //    it("should attach to the workspace", function(){
-    //        var newNode = element({tagName: "span", name: "workitem"});
-    //        expect(newNode.getText()).toBe(uniqueValue);
-    //    });
-    //    it("should be saved to the database", function(){
-    //
-    //    });
-    //})
+    describe("Enter a unique name for a new workitem node", function(){
+        beforeEach(function(){
+            this.workitemText = cuid();
+            return context.workspace.workitems.root.setText(this.workitemText);
+        });
+        it("should attach to the workspace", function(){
+            return context.expect(context.workspace.workitems.root.text)
+                .to.eventually.equal(this.workitemText);
+        });
+        iit("should be saved to the database", function(){
+            return context.expect(mongoWorkitems.getByTitle(this.workitemText)).to.eventually.have.property("title",this.workitemText);
+        });
+    })
 });

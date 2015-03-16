@@ -49,11 +49,11 @@
         });
     };
 
-    workitems.delete = function(id){
+    workitems.remove = function(id){
         return database.passToDb(function(deferred, db){
             db.workitems.remove({id:id}, function(err, result){
                 if (err) {
-                    deferred.reject("Delete of workitem with id " + id + " failed with error: " + err);
+                    deferred.reject("Remove of workitem with id " + id + " failed with error: " + err);
                     return;
                 }
                 deferred.resolve();
@@ -63,7 +63,9 @@
 
     workitems.get = function(id){
         if (!id){
-            id = defaultHomeCuid;
+            var defer = q.defer();
+            defer.reject("An id is required for a get operation")
+            return defer.promise
         }
         return database.passToDb(function(deferred, db){
             db.workitems.findOne({"id": id }, function (err, workitemFound){

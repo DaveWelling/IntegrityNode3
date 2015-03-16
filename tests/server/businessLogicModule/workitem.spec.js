@@ -7,23 +7,6 @@ describe("workitem", function () {
     var socketMock;
     before(function(){
         chai.should();
-        socketMock =(function(){
-            var mock = {};
-            var subscribers = [];
-            mock.emit = function(messageName, dataPassedIn, callback){
-                for(i=0;i<subscribers.length;i++){
-                    if(subscribers[i].messageName == messageName){
-                        subscribers[i].eventHandler(dataPassedIn, callback);
-                    }
-                }
-            };
-            mock.on = function(messageName, eventHandler){
-                subscribers.push({"messageName": messageName, "eventHandler": eventHandler});
-            };
-
-            return mock;
-        })();
-        workitem.init(socketMock);
 
     });
     describe("create", function () {
@@ -31,7 +14,7 @@ describe("workitem", function () {
             var repositoryAddStub = sinon.stub(repositories.workitems, "insert");
             try {
                 var workitemData = {};
-                socketMock.emit("workitem.create", workitemData);
+                workitem.create(workitemData);
                 repositoryAddStub.withArgs(workitemData).calledOnce.should.equal(true);
             } finally {
                 repositoryAddStub.restore();
@@ -41,13 +24,10 @@ describe("workitem", function () {
 
     describe("get", function(){
         it("should acquire a workitem for the given id", function(){
-            var fakeworkitem = {};
-            var repositoryGetStub = sinon.stub(repositories.workitems, "get").returns(fakeworkitem);
+            var repositoryGetStub = sinon.stub(repositories.workitems, "get")
             try {
                 var id = cuid();
-                socketMock.emit("workitem.get", id, function(workitem){
-                    workitem.should.be.equal(fakeworkitem);
-                });
+                workitem.get(id);
                 repositoryGetStub.withArgs(id).calledOnce.should.equal(true);
             } finally{
                 repositoryGetStub.restore();
@@ -60,7 +40,7 @@ describe("workitem", function () {
             var repositoryUpdateStub = sinon.stub(repositories.workitems, "update");
             try {
                 var workitemData = {};
-                socketMock.emit("workitem.update", workitemData);
+                workitem.update(workitemData);
                 repositoryUpdateStub.withArgs(workitemData).calledOnce.should.equal(true);
             } finally {
                 repositoryUpdateStub.restore();
@@ -69,15 +49,15 @@ describe("workitem", function () {
     });
 
     // TODO:  Consider switching this to a slowly changing dimension
-    describe("delete", function(){
-        it("should delete a workitem for the given id", function(){
-            var repositoryDeleteStub = sinon.stub(repositories.workitems, "delete");
+    describe("remove", function(){
+        it("should remove a workitem for the given id", function(){
+            var repositoryRemoveStub = sinon.stub(repositories.workitems, "remove");
             try {
                 var id = cuid();
-                socketMock.emit("workitem.delete", id);
-                repositoryDeleteStub.withArgs(id).calledOnce.should.equal(true);
+                workitem.remove(id);
+                repositoryRemoveStub.withArgs(id).calledOnce.should.equal(true);
             } finally {
-                repositoryDeleteStub.restore();
+                repositoryRemoveStub.restore();
             }
         })
     });

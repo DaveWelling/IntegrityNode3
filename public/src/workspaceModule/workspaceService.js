@@ -1,20 +1,19 @@
 angular.module("workspaceModule")
-    .service('workspaceService', ["socketApiFactory",  function (socketApiFactory) {
+    .service('workspaceService', ["$q", "socketTraffic",  function ($q, socketTraffic) {
     this.get = function(id){
-        socketApiFactory.emit("workspace.get", id);
+        return socketTraffic.request("workspace.get", id);
     };
     this.create = function(workspace){
-        socketApiFactory.emit("workspace.create", workspace);
+        return socketTraffic.request("workspace.create", workspace);
     };
     this.update = function(update){
-        socketApiFactory.emit("workspace.update", update);
+        return socketTraffic.request("workspace.update", update);
     };
-    this.delete = function(id){
-        socketApiFactory.emit("workspace.delete", id);
+    this.remove = function(id){
+        return socketTraffic.request("workspace.remove", id);
     };
     this.getRootWorkspace = function(){
-        socketApiFactory.emit("workspace.getRootWorkspace");
+        return socketTraffic.request("workspace.getRootWorkspace");
     };
-
     return this;
 }]);

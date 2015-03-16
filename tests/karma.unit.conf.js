@@ -1,4 +1,5 @@
 ﻿module.exports = function (config) {
+    var debug = require('debug')('IntegrityNode3');
 	config.set({
 		// Test frameworks to use
 		frameworks: ['jasmine'],
@@ -15,22 +16,28 @@
             { pattern: 'bower_components/cuid/dist/browser-cuid.js', watched: false, included: true, served: true },
             { pattern: 'bower_components/angular-mocks/angular-mocks.js', watched: false, included: true, served: true },
             { pattern: 'bower_components/socket.io-client/socket.io.js', watched: false, included: true, served: true },
-            { pattern: 'vendor/sinon-1.12.2.js', watched: false, included: true, served: true },
-            { pattern: 'vendor/angular-ui-tree.js', watched: false, included: true, served: true },
+            { pattern: '../node_modules/sinon/pkg/sinon.js', watched: false, included: true, served: true },            { pattern: 'vendor/angular-ui-tree.js', watched: false, included: true, served: true },
             'src/app.js',
             'src/**/*.js',
-			'../tests/client/**/*.js'
+			'../tests/client/**/*.js',
+            'src/**/*.html'
 		],
 
 		// Preprocessors to convert e.g. html to angular template cache items
-		//preprocessors: {
-	    //	"Scripts/App/Directives/*.html": ['ng-html2js'],
-		//},
 		preprocessors: {
+	    	"**/*.html": ['ng-html2js']
 		    //"Scripts/App/**/*.js": ['coverage']
 			// there are too many jshint fails in app to enable right now
 			// "Scripts/App/**/*.js" : ['jshint','coverage']
 		},
+       ngHtml2JsPreprocessor: {
+           // strip this from the file path
+           //cacheIdFromPath: function(filepath) {
+           //    debug("ng-html2j filepath: " + filepath);
+           //    return filepath;
+           //}
+           moduleName: 'my.templates'
+       },
 
 		// List of files to exclude
 		exclude: [],
@@ -80,7 +87,8 @@
             'Karma-phantomjs-launcher',
 			'karma-firefox-launcher',
 			'karma-junit-reporter',
-			'karma-xml-reporter'
+			'karma-xml-reporter',
+            'karma-ng-html2js-preprocessor'
 		]
 
         //coverageReporter: {

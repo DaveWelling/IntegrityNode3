@@ -31,11 +31,11 @@
         });
     };
 
-    workspaces.delete = function(id){
+    workspaces.remove = function(id){
         return database.passToDb(function(deferred, db){
             db.workspaces.remove({id:id}, function(err, result){
                 if (err) {
-                    deferred.reject("Delete of workspace with id " + id + " failed with error: " + err);
+                    deferred.reject("Remove of workspace with id " + id + " failed with error: " + err);
                     return;
                 }
                 deferred.resolve();

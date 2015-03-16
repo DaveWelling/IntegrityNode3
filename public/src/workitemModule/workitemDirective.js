@@ -1,29 +1,30 @@
-angular.module("workitemModule").directive("workitem",function(){
+angular.module("workitemModule").directive("workitem",["workitemService", function(workitemService){
     return {
         templateUrl: 'src/workitemModule/templateWorkitem.html',
         restrict: 'E',
         scope: {
-            node: "=ngModel"
+            node: "=ngModel",
+            hasFocus: "="
         },
         controller: function($scope, $element, $attrs){
-            var treeNodeHandle = $scope.$parent;
-            var treeNode = treeNodeHandle.$parent;
+            //var treeNodeHandle = $scope.$parent;
+            //var treeNode = treeNodeHandle.$parent;
             function saveWorkitemTitle(){
-                console.log($scope.item.title);
+                workitemService.create({"title": $scope.node.title});
             }
             $scope.titleKeyPress = function(keyEvent){
                 if (keyEvent.which === 13){
                     saveWorkitemTitle()
                 }
-
             };
-            if (treeNode.depth() === 1){
+            //if (treeNode.depth() === 1){
+            if ($scope.hasFocus) {
                 $element.children(".workitemContent")[0].focus();
             }
         }
         //controller: 'workitemController'
     }
-});
+}]);
 
 //http://fdietz.github.io/recipes-with-angular-js/common-user-interface-patterns/editing-text-in-place-using-html5-content-editable.html
 angular.module("workitemModule").directive("contenteditable", function() {

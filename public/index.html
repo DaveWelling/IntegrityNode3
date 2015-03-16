@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <title>Integrity</title>
+
+    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css' />
+    <link rel='stylesheet' href='/bower_components/angular-ui-tree/dist/angular-ui-tree.min.css' />
+    <!--<link rel='stylesheet' href='/vendor/angular-ui-tree.min.css' />-->
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+</head>
+<body>
+<div id="wrap">
+    <div class="view-container workspace">
+        <div ng-view class="view-frame"></div>
+    </div>
+    <div id="push"></div>
+</div>
+<div id="stickyFooter">
+    <hr id="bottomHorizontalRule"/>
+    <footer class="container">
+        <small><a href="http://theredcircuit.com">The Red Circuit</a></small>
+    </footer>
+</div>
+
+<!-- Vendor stuff -->
+<script src="/bower_components/angular/angular.js"></script>
+<script src="/bower_components/angular-route/angular-route.js"></script>
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/bower_components/socket.io-client/socket.io.js"></script>
+<!--<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>-->
+<script src="/bower_components/cuid/dist/browser-cuid.js"></script>
+<script src="/bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
+<!--<script src="/vendor/angular-ui-tree.js"></script>-->
+
+
+
+<!-- app code -->
+<script src="/src/app.js"></script>
+<script src="/src/appRouter.js"></script>
+
+<script src="/src/commonModule/constants.js"></script>
+<script src="/src/commonModule/socketTraffic.js"></script>
+<script src="/src/workitemTreeModule/workItemTreeDirective.js"></script>
+
+<script src="/src/workitemModule/workitemDirective.js"></script>
+<script src="/src/workitemModule/workitemService.js"></script>
+
+<!--<script src="/src/workspaceModule/workspaceDirective.js"></script>-->
+<script src="/src/workspaceModule/workspaceController.js"></script>
+<script src="/src/workspaceModule/workspaceService.js"></script>
+
+</body>
+</html>

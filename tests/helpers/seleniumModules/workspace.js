@@ -1,4 +1,5 @@
 (function(workspace){
+    var webdriver = require('selenium-webdriver');
     var cuid = require('cuid');
     var result = {
         get workitems() {
@@ -18,6 +19,9 @@
             },
             get exists() {
                 return first.isPresent();
+            },
+            setText: function(textToSet){
+                return first.sendKeys(textToSet, webdriver.Key.ENTER);
             }
         };
     }
@@ -31,15 +35,6 @@
         return browser.get('#/workspace/'+ workspaceId);
     };
 
-    //Object.defineProperty(workspace, "workitems", {
-    //    get: function(){
-    //        return {
-    //            get root() {
-    //                return getWorkItemRoot();
-    //            }
-    //        }
-    //    }
-    //});
 
     result.getWorkspaceList = function(){
 

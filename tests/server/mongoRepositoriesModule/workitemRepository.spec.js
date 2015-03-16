@@ -24,7 +24,7 @@ describe("workitemRepository Integration", function(){
     }
     afterEach(function(){
         cleanUpQueue.forEach(function(testWorkitem){
-            repository.delete(testWorkitem.id);
+            repository.remove(testWorkitem.id);
         });
     });
 
@@ -65,6 +65,14 @@ describe("workitemRepository Integration", function(){
                 },
                 function (err){
                     done(err);
+                }
+            );
+        });
+        it("should throw an error if an id is not passed", function(){
+            repository.get(null).then(
+                function(foundWorkitem){
+                }, function(err){
+                    return expect(err.message).to.eventually.be("An id is required for a get operation.");
                 }
             );
         });

@@ -1,16 +1,16 @@
 angular.module("workitemModule")
-    .service("workitemService", ["socketApiFactory", function(socketApiFactory){
+    .service("workitemService", ["socketTraffic", function(socketTraffic){
         this.get = function(id){
-            socketApiFactory.emit("workitem.get", id);
+            return socketTraffic.request("workitem.get", id);
         };
-        this.create = function(workspace){
-            socketApiFactory.emit("workitem.create", workspace);
+        this.create = function(workitem){
+            return socketTraffic.request("workitem.create", workitem);
         };
         this.update = function(update){
-            socketApiFactory.emit("workitem.update", update);
+            return socketTraffic.request("workitem.update", update);
         };
-        this.delete = function(id){
-            socketApiFactory.emit("workitem.delete", id);
+        this.remove = function(id){
+            return socketTraffic.request("workitem.remove", id);
         };
     return this;
 }]);
