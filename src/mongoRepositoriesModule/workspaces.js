@@ -25,7 +25,7 @@
                 if (err){
                     deferred.reject("Update of workspace id " + workspace.id + " failed with error: " + err);
                 } else{
-                    deferred.resolve();
+                    deferred.resolve(workspace);
                 }
             });
         });
@@ -38,7 +38,7 @@
                     deferred.reject("Remove of workspace with id " + id + " failed with error: " + err);
                     return;
                 }
-                deferred.resolve();
+                deferred.resolve(id);
             })
         });
     };

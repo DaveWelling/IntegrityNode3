@@ -14,6 +14,7 @@ describe("workitemDirective", function () {
         inject(function($rootScope, $compile) {
             this.testTitle = "test title";
             scope = $rootScope.$new();
+            this.rootScope = scope;
             scope.node = {title:this.testTitle, nodes:{}};
             element = '<workitem ng-model="node" has-focus="true"></workitem>';
             element = $compile(element)(scope);
@@ -26,14 +27,27 @@ describe("workitemDirective", function () {
         var span = workitem.children[0];
         expect(span.innerText).toBe(this.testTitle);
     });
-    it("should save a workitem when user hits enter", function(){
-        var isolated = element.isolateScope();
-        isolated.titleKeyPress({which:13});
-        expect(this.workitemService.create.calledOnce).toBe(true);
-    });
-    it("should save workitem with title 'test title'", function(){
-        var isolated = element.isolateScope();
-        isolated.titleKeyPress({which:13});
-        expect(this.workitemService.create.args[0][0].title).toBe(this.testTitle);
+    describe("user hits enter", function () {
+        it("should save a workitem", function(){
+            var isolated = element.isolateScope();
+            isolated.titleKeyPress({which:13, preventDefault: function(){}});
+            expect(this.workitemService.create.calledOnce).toBe(true);
+        });
+        it("should save workitem with title 'test title'", function(){
+            var isolated = element.isolateScope();
+            isolated.titleKeyPress({which:13, preventDefault: function(){}});
+            expect(this.workitemService.create.args[0][0].title).toBe(this.testTitle);
+        });
+        it("should request that a sibling be added", function(done){
+            var that = this;
+            var isolated = element.isolateScope();
+
+            this.rootScope.$on("addSibling", function(event, data){
+                expect(data.title).toBe(that.testTitle);
+                done();
+            });
+            isolated.titleKeyPress({which:13, preventDefault: function(){}});
+            this.rootScope.$apply()
+        });
     });
 });

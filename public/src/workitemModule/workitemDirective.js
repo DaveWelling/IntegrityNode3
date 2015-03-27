@@ -12,9 +12,14 @@ angular.module("workitemModule").directive("workitem",["workitemService", functi
             function saveWorkitemTitle(){
                 workitemService.create({"title": $scope.node.title});
             }
+            function addSibling(){
+                $scope.$emit("addSibling", $scope.node);
+            }
             $scope.titleKeyPress = function(keyEvent){
                 if (keyEvent.which === 13){
-                    saveWorkitemTitle()
+                    keyEvent.preventDefault();
+                    saveWorkitemTitle();
+                    addSibling();
                 }
             };
             //if (treeNode.depth() === 1){

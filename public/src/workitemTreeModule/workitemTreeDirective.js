@@ -1,26 +1,31 @@
-
-angular.module('workitemTreeModule').directive('workitemTree', function(){
-    return {
-        templateUrl: 'src/workitemTreeModule/templateTree.html',
-        restrict: 'E',
-        scope:{},
-        link: function($scope, $element){
-            $scope.data = [{title:"", nodes:{}}];
-            //$scope.data = [
-            //    {title: "hello", nodes:
-            //        [
-            //            {title:"world", nodes:[
-            //                {title:"below world", nodes:[]},
-            //                {title:"below world 2", nodes:[]}
-            //            ]},
-            //            {title: "suck it", nodes: []}
-            //        ]
-            //    }
-            //];
-
-            $scope.toggle = function(scope) {
-                scope.toggle();
-            };
+angular.module('workitemTreeModule')
+    .directive('workitemTree'
+    , function () {
+        return {
+            templateUrl: 'src/workitemTreeModule/templateTree.html',
+            restrict: 'E',
+            scope: {
+                node: "=ngModel"
+            },
+            link: function ($scope, $element) {
+                // ToDo: get root node for workspace root node id
+                $scope.toggle = function (scope) {
+                    scope.toggle();
+                };
+            }
         }
-    }
-});
+    })
+    .directive('workitemTreeBough'
+    , function () {
+        return{
+            templateUrl: 'src/workitemTreeModule/templateBough.html',
+            restrict: 'E',
+            scope: {
+                node: "=ngModel"
+            },
+            link: function($scope){
+
+            }
+        }
+
+    });

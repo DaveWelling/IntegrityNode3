@@ -12,13 +12,24 @@
     };
 
     function getWorkItemRoot(){
-        var first = element.all({name:"workitemContent"}).first();
+
+        var workitem = element.all({name:"workitemContent"});
+        var first = workitem.first();
         return {
             get text(){
                 return first.getText();
             },
             get exists() {
                 return first.isPresent();
+            },
+            get sibling() {
+                return first.getWebElement().findElement(By.xpath("following-sibling::*"));
+            },
+            get elementCount(){
+                return first.getWebElement().findElements(By.xpath("child::*")).then(function(webElements){
+                    return webElements.length;
+                });
+
             },
             setText: function(textToSet){
                 return first.sendKeys(textToSet, webdriver.Key.ENTER);

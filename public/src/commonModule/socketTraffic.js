@@ -1,10 +1,10 @@
-angular.module("commonModule").service('socketTraffic', ["$q", "socketShell", function (q, socketShell) {
+angular.module("commonModule").service('socketTraffic', ["$q", "socketShell", function ($q, socketShell) {
     var ioConnection = socketShell;
-    function request(namespace, data) {
-        var defer = q.defer();
-        ioConnection.emit(namespace, data, function(messageId){
-            ioConnection.on(namespace + "." + messageId + ".response", function(data){
-                defer.resolve(data);
+    function request(namespace, outgoingData) {
+        var defer = $q.defer();
+        ioConnection.emit(namespace, outgoingData, function(messageId){
+            ioConnection.on(namespace + "." + messageId + ".response", function(result){
+                defer.resolve(result);
             });
             ioConnection.on(namespace + "." + messageId + ".error", function(error){
                 defer.reject(error);
@@ -12,16 +12,23 @@ angular.module("commonModule").service('socketTraffic', ["$q", "socketShell", fu
         });
         return defer.promise;
     }
-    function respond(namespace, response){
+    function respond(namespace, responseFunction){
         ioConnection.on(namespace ,function(requestData, callback){
             var messageId = cuid();
             callback(messageId);
-            try {
-                var responseData = response(requestData);
-                ioConnection.emit(namespace + "." + messageId + ".response", responseData)
-            } catch (err){
-                ioConnection.emit(namespace + "." + messageId + ".error", err)
-            }
+			try {
+				var responsePromise = responseFunction(requestData);
+				if (!responsePromise || !responsePromise.then){
+					throw Error("A promise must be returned by the responseFunction parameter")
+				}
+				responsePromise.then(function(responseData){
+					ioConnection.emit(namespace + "." + messageId + ".response", responseData)
+				}, function(err){
+					ioConnection.emit(namespace + "." + messageId + ".error", err)
+				});
+			} catch (err){
+				ioConnection.emit(namespace + "." + messageId + ".error", err)
+			}
 
         });
     }

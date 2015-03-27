@@ -4,7 +4,7 @@
         socketTraffic.respond("workspace.get", workspace.get);
         socketTraffic.respond("workspace.create", workspace.create);
         socketTraffic.respond("workspace.update", workspace.update);
-        socketTraffic.respond("workspace.delete", workspace.remove);
+        socketTraffic.respond("workspace.remove", workspace.remove);
         socketTraffic.respond("workspace.getRootWorkspace", workspace.getRootWorkspace);
     };
     workspace.get = function(id){
@@ -20,6 +20,6 @@
         return repository.workspaces.insert(workspace);
     };
     workspace.getRootWorkspace = function(){
-        workspace.get(repository.workspaces.getRootWorkspaceCuid());
+        return workspace.get(repository.workspaces.getRootWorkspaceCuid());
     }
 })(module.exports);

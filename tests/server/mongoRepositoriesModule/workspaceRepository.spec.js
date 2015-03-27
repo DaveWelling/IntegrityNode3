@@ -17,7 +17,7 @@ describe("workspaceRepository Integration", function(){
     }
     afterEach(function(){
         cleanUpQueue.forEach(function(testWorkspace){
-            repository.delete(testWorkspace.id);
+            repository.remove(testWorkspace.id);
         });
     });
     describe("get", function(){

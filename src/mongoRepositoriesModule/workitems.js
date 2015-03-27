@@ -43,7 +43,7 @@
                 if (err){
                     deferred.reject("Update of workitem id " + workitem.id + " failed with error: " + err);
                 } else{
-                    deferred.resolve();
+                    deferred.resolve(workitem);
                 }
             });
         });
@@ -56,7 +56,7 @@
                     deferred.reject("Remove of workitem with id " + id + " failed with error: " + err);
                     return;
                 }
-                deferred.resolve();
+                deferred.resolve(id);
             })
         });
     };

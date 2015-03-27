@@ -2,8 +2,10 @@
     <header class="container"><h1>Integrity</h1></header>
     <hr/>
     <section id="body" class="container">
-        <section id="main" class="col-md-8">
-            <workitem-tree></workitem-tree>
+        <section id="main" class="col-md-8" ng-if="loadingDone">
+
+            Hello World
+            <workitem-tree ng-Model="rootWorkitem"></workitem-tree>
         </section>
         <section id="nextActionableItems" class="col-md-4 nextActionableArea">
             <h4>Next Actionable:</h4>

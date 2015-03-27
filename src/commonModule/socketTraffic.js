@@ -19,13 +19,20 @@
             });
             return defer.promise;
         };
-        this.respond = function(namespace, response){
+        this.respond = function(namespace, responseFunction){
             ioConnection.on(namespace ,function(requestData, callback){
                 var messageId = cuid();
                 callback(messageId);
                 try {
-                    var responseData = response(requestData);
-                    ioConnection.emit(namespace + "." + messageId + ".response", responseData)
+                    var responsePromise = responseFunction(requestData);
+					if (!responsePromise || !responsePromise.then){
+						throw Error("A promise must be returned by the responseFunction parameter")
+					}
+					responsePromise.then(function(responseData){
+						ioConnection.emit(namespace + "." + messageId + ".response", responseData)
+					}, function(err){
+						ioConnection.emit(namespace + "." + messageId + ".error", err)
+					});
                 } catch (err){
                     ioConnection.emit(namespace + "." + messageId + ".error", err)
                 }

@@ -24,7 +24,7 @@ describe("workitem", function () {
 
     describe("get", function(){
         it("should acquire a workitem for the given id", function(){
-            var repositoryGetStub = sinon.stub(repositories.workitems, "get")
+            var repositoryGetStub = sinon.stub(repositories.workitems, "get");
             try {
                 var id = cuid();
                 workitem.get(id);

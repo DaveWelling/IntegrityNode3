@@ -3,6 +3,7 @@ describe("socketTraffic", function () {
     var chai = require("chai");
     var cuid = require("cuid");
     var expect = chai.expect;
+	var q = require("q");
     var socketTraffic = require("../../../src/commonModule/socketTraffic");
     describe("request", function () {
 
@@ -153,11 +154,17 @@ describe("socketTraffic", function () {
         it("should emit a response with '.response' appended to the namespace", function(){
             var uniqueNamespace = cuid();
             var expectedResponseNamespace;
-            this.target.respond(uniqueNamespace, function(){}); // do nothing
+			var that = this;
+			var defer = q.defer();
+			var promiseReturnedFromResponseFunction = defer.promise;
+			this.target.respond(uniqueNamespace, function(){return promiseReturnedFromResponseFunction;});
             this.socketMock.raiseEvent(uniqueNamespace, {}, function(messageId){
                 expectedResponseNamespace = uniqueNamespace + "." + messageId + ".response"
             });
-            expect(this.socketMock.emit.args[0][0]).to.equal(expectedResponseNamespace);
+			defer.resolve({});
+			promiseReturnedFromResponseFunction.finally(function(){ // wait until after success function is called
+				return expect(that.socketMock.emit.args[0][0]).to.equal(expectedResponseNamespace);
+			});
         });
         it("if an error occurs, should emit a response with '.error' appended to the namespace", function(){
             var uniqueNamespace = cuid();
@@ -170,5 +177,30 @@ describe("socketTraffic", function () {
             });
             expect(this.socketMock.emit.args[0][0]).to.equal(expectedResponseNamespace);
         });
+		it("emits an error if a promise is not returned from the response parameter function", function(){
+			var uniqueNamespace = cuid();
+			var expectedErrorResponseNamespace;
+			this.target.respond(uniqueNamespace, function(){}); // should throw an error since nothing is returned
+			this.socketMock.raiseEvent(uniqueNamespace, {}, function(messageId){
+				expectedErrorResponseNamespace = uniqueNamespace + "." + messageId + ".error"
+			});
+			expect(this.socketMock.emit.args[0][0]).to.equal(expectedErrorResponseNamespace);
+		});
+		it("should emit a response only when the response promise success function is called", function(){
+			var uniqueNamespace = cuid();
+			var expectedResponseNamespace;
+			var that = this;
+			var defer = q.defer();
+			var promiseReturnedFromResponseFunction = defer.promise;
+			this.target.respond(uniqueNamespace, function(){return promiseReturnedFromResponseFunction;});
+			this.socketMock.raiseEvent(uniqueNamespace, {}, function(messageId){
+				expectedResponseNamespace = uniqueNamespace + "." + messageId + ".response"
+			});
+			defer.resolve({}); // cause response promise success function to fire
+			promiseReturnedFromResponseFunction.finally(function(){ // wait until after success function is called
+				return expect(that.socketMock.emit.args[0][0]).to.equal(expectedResponseNamespace);
+			});
+		});
+
     });
 });

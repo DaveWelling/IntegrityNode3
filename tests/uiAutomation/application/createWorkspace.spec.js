@@ -1,8 +1,8 @@
 describe("Workspace", function(){
-    var context = require('../helpers/seleniumContext');
+    var context = require('../../helpers/seleniumContext');
     var _ = require('underscore');
     var cuid = require('cuid');
-    var mongoWorkitems = require('../../src/mongoRepositoriesModule/workitems');
+    var mongoWorkitems = require('../../../src/mongoRepositoriesModule/workitems');
 
 
 
@@ -11,10 +11,10 @@ describe("Workspace", function(){
     });
 
     describe("Create a workitem in a new workspace", function(){
-        it("should exist", function(){
+        it("new workitem should be visible", function(){
             return context.expect(context.workspace.workitems.root.exists).to.eventually.be.true;
         });
-        it("should have no text", function(){
+        it("new workitem should have no text", function(){
             return context.expect(context.workspace.workitems.root.text).to.eventually.equal('');
         })
     });
@@ -41,8 +41,15 @@ describe("Workspace", function(){
             return context.expect(context.workspace.workitems.root.text)
                 .to.eventually.equal(this.workitemText);
         });
-        iit("should be saved to the database", function(){
+        it("should be saved to the database", function(){
             return context.expect(mongoWorkitems.getByTitle(this.workitemText)).to.eventually.have.property("title",this.workitemText);
+        });
+        it("the workitem node should contain only text", function(){
+            return context.expect(context.workspace.workitems.root.elementCount)
+                .to.eventually.equal(0);
+        });
+        it("should add a sibling workitem", function(){
+            return context.expect(context.workspace.workitems.root.sibling).to.not.eventually.be.null;
         });
     })
 });
