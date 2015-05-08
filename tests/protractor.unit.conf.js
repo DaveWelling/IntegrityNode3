@@ -1,7 +1,17 @@
 exports.config = {
-    framework: 'mocha',
+    allScriptsTimeout: 11000,
+	seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
     specs: [
-        './e2e/**/*.spec.js'
+        'uiAutomation/dynamicTree/*.spec.js'
     ],
-    baseUrl: 'http://localhost:3000'
+    baseUrl: 'http://localhost:3000',
+
+    capabilities: {
+        'browserName': 'chrome'
+    },
+
+    framework: 'mocha',
+    mochaOpts: {
+        enableTimeouts: false
+    }
 };

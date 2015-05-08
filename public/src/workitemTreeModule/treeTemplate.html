@@ -1,0 +1,22 @@
+
+<ul frang-tree>
+    <li frang-tree-repeat="node in nodes">
+        <div>
+			<span class="icon"
+                  ng-class="{collapsed: node.collapsed, expanded: !node.collapsed}"
+                  ng-show="node.links && node.links.length > 0"
+                  ng-click="node.collapsed = !node.collapsed">
+			</span>
+            <span class="label"
+                  ng-class="{folder: node.links && node.links.length > 0}"
+                  ng-bind="node.title"
+                  ng-click="action(node)">
+            </span>
+            <span class="DragAndDropHandle">
+            </span>
+        </div>
+        <ul ng-if="!node.collapsed && node.links && node.links.length > 0"
+            frang-tree-insert-children="node.links">
+        </ul>
+    </li>
+</ul>

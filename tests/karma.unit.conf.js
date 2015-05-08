@@ -16,7 +16,7 @@
             { pattern: 'bower_components/cuid/dist/browser-cuid.js', watched: false, included: true, served: true },
             { pattern: 'bower_components/angular-mocks/angular-mocks.js', watched: false, included: true, served: true },
             { pattern: 'bower_components/socket.io-client/socket.io.js', watched: false, included: true, served: true },
-            { pattern: '../node_modules/sinon/pkg/sinon.js', watched: false, included: true, served: true },            { pattern: 'vendor/angular-ui-tree.js', watched: false, included: true, served: true },
+            { pattern: '../node_modules/sinon/pkg/sinon.js', watched: false, included: true, served: true },
             'src/app.js',
             'src/**/*.js',
 			'../tests/client/**/*.js',

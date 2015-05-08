@@ -41,7 +41,7 @@ describe("workspaceService", function(){
         var id = cuid();
         this.target.remove(id);
         expect(this.mockSocketTraffic.request.withArgs("workspace.remove", id)
-            .calledOnce).to.equal(true);
+            .calledOnce).toBe(true);
     });
 	it("remove can also accept a workspace object to delete", function(){
 		var workspaceToDelete = {
@@ -51,7 +51,7 @@ describe("workspaceService", function(){
 		this.target.remove(workspaceToDelete);
 
 		expect(this.mockSocketTraffic.request.withArgs("workspace.remove", workspaceToDelete.id)
-			.calledOnce).to.equal(true);
+			.calledOnce).toBe(true);
 	});
     it("getRootWorkspace should send a getRootWorkspace request to the server", function(){
         this.target.getRootWorkspace();

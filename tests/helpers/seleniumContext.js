@@ -4,6 +4,10 @@
     var chaiAsPromised = require('chai-as-promised');
     chai.use(chaiAsPromised);
     seleniumContext.expect = chai.expect;
+
+    var DynamicTreePage = require('./seleniumModules/dynamicTreePage');
+    seleniumContext.dynamicTreePage = new DynamicTreePage();
+
     seleniumContext.workspace = require('./seleniumModules/workspace');
     seleniumContext.workspace.init(this);
 })(module.exports);

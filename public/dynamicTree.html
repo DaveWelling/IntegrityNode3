@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<>
+
+<div ng-controller="dynamicTreeController">
+    <label>
+        Tree Data:
+    </label>
+    <br/>
+    <textarea id="dataForTree" json-edit="jsonTreeData" rows="20"></textarea>
+    <button id="bindToTree" type="button" ng-click="bindToTree()" >Bind To Tree</button>
+    <button id="getJsonFromTree" type="button" ng-click="getJsonFromTree()">Get JSON From Tree</button>
+    <hr/>
+
+    <p id="expand-collapse-all">
+        <a href="" ng-click="expandAll()">Expand all</a>
+        <a href="" ng-click="collapseAll()">Collapse all</a>
+    </p>
+
+    <ul frang-tree>
+        <li frang-tree-repeat="node in treeData">
+            <div>
+			<span class="icon"
+                  ng-class="{collapsed: node.collapsed, expanded: !node.collapsed}"
+                  ng-show="node.links && node.links.length > 0"
+                  ng-click="node.collapsed = !node.collapsed">
+			</span>
+            <workitem ng-model="node"></workitem>
+            <!--<span class="label"-->
+                  <!--ng-class="{folder: node.links && node.links.length > 0}"-->
+                  <!--ng-bind="node.title"-->
+                  <!--ng-click="action(node)">-->
+            <!--</span>-->
+            </div>
+            <ul ng-if="!node.collapsed && node.links && node.links.length > 0"
+                frang-tree-insert-children="node.links">
+            </ul>
+        </li>
+    </ul>
+    <hr/>
+    <div>{{treeData}}</div>
+</div>
+<!-- Vendor stuff -->
+<script src="/bower_components/angular/angular.js"></script>
+<script src="/bower_components/angular-route/angular-route.js"></script>
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/bower_components/socket.io-client/socket.io.js"></script>
+<script src="/bower_components/cuid/dist/browser-cuid.js"></script>
+<script src="/bower_components/underscore/underscore-min.js"></script>
+
+<!-- app code -->
+<script src="/src/app.js"></script>
+<script src="/src/appRouter.js"></script>
+
+<script src="/src/commonModule/constants.js"></script>
+<script src="/src/commonModule/socketTraffic.js"></script>
+<script src="/src/commonModule/jsonEditor.js"></script>
+<script src="/src/workitemTreeModule/workitemTreeDirective.js"></script>
+
+<script src="/src/workitemModule/contentEditableDirective.js"></script>
+<script src="/src/workitemModule/workitemDirective.js"></script>
+<script src="/src/workitemModule/workitemService.js"></script>
+
+<!--<script src="/src/workspaceModule/workspaceDirective.js"></script>-->
+<script src="/src/workspaceModule/workspaceController.js"></script>
+<script src="/src/workspaceModule/workspaceService.js"></script>
+<script src="/src/dynamicTreeController.js"></script>
+
+</body>
+</html>

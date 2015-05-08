@@ -3,9 +3,8 @@
     <hr/>
     <section id="body" class="container">
         <section id="main" class="col-md-8" ng-if="loadingDone">
-
             Hello World
-            <workitem-tree ng-Model="rootWorkitem"></workitem-tree>
+            <workitem-tree ng-Model="rootWorkitem.links"></workitem-tree>
         </section>
         <section id="nextActionableItems" class="col-md-4 nextActionableArea">
             <h4>Next Actionable:</h4>

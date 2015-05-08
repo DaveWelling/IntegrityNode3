@@ -2,6 +2,7 @@
 @import "../bower_components/bootstrap/less/mixins.less";
 @import "../bower_components/bootstrap/less/list-group.less";
 @import "../bower_components/bootstrap/less/buttons.less";
+@import "../bower_components/bootstrap/less/glyphicons.less";
 
 html,
 body {
@@ -52,6 +53,7 @@ a {
   margin-left: 2px;
 }
 
+// Old Tree stuff may be helpful when refining new tree
 .angular-ui-tree-handle {
   background: #f8faff;
   border: 0px solid #dae2ea;
@@ -101,3 +103,50 @@ a {
   .list-group-item.active;
 }
 //** End Next Actionable list stuff **
+
+// New tree stuff
+
+.icon {
+  display: block;
+  float: left;
+
+  width: 16px;
+  height: 16px;
+}
+li {
+  list-style-type: none;
+}
+.expanded {
+  .glyphicon;
+  .glyphicon-triangle-bottom;
+  //background-image: url(../img/expanded.png);
+}
+.collapsed {
+  .glyphicon;
+  .glyphicon-triangle-right;
+  //background-image: url(../img/collapsed.png);
+}
+
+.label {
+  color: green;
+}
+.label.folder {
+  color: darkmagenta;
+}
+
+ul .tree-drag > div > span.label {
+  background-color: lightsalmon;
+}
+.tree-drag-over > div > span.label {
+  background-color: darkseagreen;
+}
+
+.ng-invalid {
+  outline: 0;
+  border: 1px solid #FF0000;
+}
+
+#dataForTree{
+  width:390px;
+  height:390px;
+}
