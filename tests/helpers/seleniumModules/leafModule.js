@@ -13,6 +13,19 @@
 		text: {get: function(){
 			return this.locator.element(by.css("workitem > span")).getText();
 		}},
+		setCursorPosition: { value: function(index){
+			var textElement = this.locator.element(by.css("workitem > span"));
+			textElement.click();
+			function setCursor(arguments) {
+				var range = document.createRange();
+				var sel = window.getSelection();
+				range.setStart(arguments[0].childNodes[2], arguments[1]);
+				range.collapse(true);
+				sel.removeAllRanges();
+				sel.addRange(range);
+			}
+			return browser.executeScript(setCursor, textElement.getWebElement(), 5);
+		}},
 		hasExpansionIcon: {get: function(){
 			return this.getExpansionIcon().isDisplayed();
 		}},

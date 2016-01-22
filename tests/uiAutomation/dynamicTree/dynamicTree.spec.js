@@ -57,7 +57,11 @@ describe("Dynamic Tree", function () {
 						{title: "child1"},
 						{title: "child2"}
 					],
-					collapsed: true
+					meta: {
+						view: {
+							collapsed: true
+						}
+					}
 				}
 			]);
 			context.dynamicTreePage.tree.firstRoot.expand();
@@ -73,7 +77,11 @@ describe("Dynamic Tree", function () {
 						{title: "child1"},
 						{title: "child2"}
 					],
-					collapsed: true
+					meta: {
+						view: {
+							collapsed: true
+						}
+					}
 				}
 			]);
 			return context.expect(
@@ -94,6 +102,32 @@ describe("Dynamic Tree", function () {
 				context.dynamicTreePage.tree.firstRoot.child(1).text
 			).to.eventually.equal("child2");
 		});
+
+		describe("keystrokes", function () {
+			iit("Tab increases nesting of workitem and all children", function () {
+				context.dynamicTreePage.setDataForTree([
+					{
+						"title":"root1",
+						"links": [
+							{"title": "child1"},
+							{"title": "child to move",
+								"links": [
+									{"title" : "grandchild to move"}
+								]
+							}
+						]
+					}
+				]);
+				context.dynamicTreePage.tree.firstRoot.child(1).setCursorPosition(0);
+				context.dynamicTreePage.tree.firstRoot.child(1).sendKeys(webdriver.keys.tab).then(function(){
+						return expect(context.dynamicTreePage.tree.firstRoot.child(2).child(1).text)
+							.to.eventually.be("child to move");
+					});
+
+
+			});
+		});
+
 	});
 });
 

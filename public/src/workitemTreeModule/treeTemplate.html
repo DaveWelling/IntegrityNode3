@@ -1,21 +1,17 @@
 
 <ul frang-tree>
-    <li frang-tree-repeat="node in nodes">
+    <li frang-tree-repeat="node in treeData">
         <div>
 			<span class="icon"
-                  ng-class="{collapsed: node.collapsed, expanded: !node.collapsed}"
+                  ng-class="{collapsed: node.meta.view.collapsed, expanded: !node.meta.view.collapsed}"
                   ng-show="node.links && node.links.length > 0"
-                  ng-click="node.collapsed = !node.collapsed">
+                  ng-click="node.meta.view.collapsed = !node.meta.view.collapsed">
 			</span>
-            <span class="label"
-                  ng-class="{folder: node.links && node.links.length > 0}"
-                  ng-bind="node.title"
-                  ng-click="action(node)">
-            </span>
+            <workitem ng-model="node"></workitem>
             <span class="DragAndDropHandle">
             </span>
         </div>
-        <ul ng-if="!node.collapsed && node.links && node.links.length > 0"
+        <ul ng-if="!node.meta.view.collapsed && node.links && node.links.length > 0"
             frang-tree-insert-children="node.links">
         </ul>
     </li>

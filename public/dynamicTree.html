@@ -23,26 +23,27 @@
         <a href="" ng-click="collapseAll()">Collapse all</a>
     </p>
 
-    <ul frang-tree>
-        <li frang-tree-repeat="node in treeData">
-            <div>
-			<span class="icon"
-                  ng-class="{collapsed: node.collapsed, expanded: !node.collapsed}"
-                  ng-show="node.links && node.links.length > 0"
-                  ng-click="node.collapsed = !node.collapsed">
-			</span>
-            <workitem ng-model="node"></workitem>
-            <!--<span class="label"-->
-                  <!--ng-class="{folder: node.links && node.links.length > 0}"-->
-                  <!--ng-bind="node.title"-->
-                  <!--ng-click="action(node)">-->
-            <!--</span>-->
-            </div>
-            <ul ng-if="!node.collapsed && node.links && node.links.length > 0"
-                frang-tree-insert-children="node.links">
-            </ul>
-        </li>
-    </ul>
+    <workitem-tree></workitem-tree>
+    <!--<ul frang-tree>-->
+        <!--<li frang-tree-repeat="node in treeData">-->
+            <!--<div>-->
+			<!--<span class="icon"-->
+                  <!--ng-class="{collapsed: node.meta.view.collapsed, expanded: !node.meta.view.collapsed}"-->
+                  <!--ng-show="node.links && node.links.length > 0"-->
+                  <!--ng-click="node.meta.view.collapsed = !node.meta.view.collapsed">-->
+			<!--</span>-->
+            <!--<workitem ng-model="node"></workitem>-->
+            <!--&lt;!&ndash;<span class="label"&ndash;&gt;-->
+                  <!--&lt;!&ndash;ng-class="{folder: node.links && node.links.length > 0}"&ndash;&gt;-->
+                  <!--&lt;!&ndash;ng-bind="node.title"&ndash;&gt;-->
+                  <!--&lt;!&ndash;ng-click="action(node)">&ndash;&gt;-->
+            <!--&lt;!&ndash;</span>&ndash;&gt;-->
+            <!--</div>-->
+            <!--<ul ng-if="!node.meta.view.collapsed && node.links && node.links.length > 0"-->
+                <!--frang-tree-insert-children="node.links">-->
+            <!--</ul>-->
+        <!--</li>-->
+    <!--</ul>-->
     <hr/>
     <div>{{treeData}}</div>
 </div>
